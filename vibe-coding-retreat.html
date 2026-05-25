@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김지안</title>
+<meta name="description" content="3박 4일, 코드를 모르는 사람도 자기만의 도구를 만들 수 있도록. AI와 함께 코딩하는 새로운 방법을 강원도 양양에서.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Noto+Serif+KR:wght@300..900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root {
+  --bg: #f1ebdd;
+  --bg-2: #e8dfc8;
+  --ink: #161412;
+  --ink-2: #524c42;
+  --ink-3: #8a8275;
+  --accent: #d63d1f;
+  --accent-deep: #a52d15;
+  --line: rgba(22,20,18,0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.serif { font-family: 'Fraunces', 'Noto Serif KR', serif; }
+.mono  { font-family: 'JetBrains Mono', monospace; }
+.kr-serif { font-family: 'Noto Serif KR', serif; }
+
+/* Grain overlay */
+body::before {
+  content:'';
+  position: fixed; inset:0;
+  pointer-events:none; z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: fixed; top:0; left:0; right:0;
+  padding: 22px 36px;
+  display:flex; justify-content: space-between; align-items: center;
+  z-index: 100;
+  font-size: 12px;
+}
+.nav__logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 30, "SOFT" 50;
+}
+.nav__logo em { font-style: italic; color: var(--accent); }
+.nav__links {
+  display:flex; gap: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-2);
+}
+.nav__links a {
+  position: relative;
+  transition: color .3s;
+}
+.nav__links a:hover { color: var(--accent); }
+.nav__cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 9px 18px;
+  border: 1px solid var(--ink);
+  border-radius: 100px;
+  transition: all .3s;
+}
+.nav__cta:hover { background: var(--ink); color: var(--bg); }
+
+/* ============ HERO ============ */
+.hero {
+  min-height: 100vh;
+  padding: 130px 36px 56px;
+  position: relative;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hero__topmeta {
+  display:flex; justify-content: space-between; align-items: baseline;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+}
+.hero__topmeta .dot {
+  display:inline-block; width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+.hero__title {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  font-weight: 400;
+  font-size: clamp(56px, 13.5vw, 232px);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  margin: 40px 0 0;
+}
+.hero__title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+.hero__title .small {
+  font-size: 0.42em;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  vertical-align: 0.6em;
+  margin-left: 8px;
+  color: var(--ink-2);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.hero__bottom {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 36px;
+  align-items: end;
+  margin-top: 80px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.hero__lead {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px;
+  line-height: 1.55;
+  max-width: 420px;
+  color: var(--ink);
+}
+.hero__lead strong { font-weight: 600; }
+
+.info-block { display:flex; flex-direction: column; gap: 6px; }
+.info-block__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-3);
+}
+.info-block__value {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 30;
+}
+.info-block__value.kr {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+/* ============ MARQUEE ============ */
+.marquee {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 22px 0;
+  overflow: hidden;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+.marquee__track {
+  display:flex; gap: 60px;
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-style: italic;
+  font-size: clamp(28px, 4.5vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+.marquee__track span { display:inline-flex; align-items: center; gap: 60px; }
+.marquee__track .star { color: var(--accent); font-size: 0.7em; font-style: normal; }
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+
+/* ============ SECTION BASE ============ */
+section { padding: 120px 36px; position: relative; }
+.section__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  display:flex; align-items: center; gap: 12px;
+  margin-bottom: 24px;
+}
+.section__num::before {
+  content:''; width: 24px; height: 1px; background: var(--ink-3);
+}
+.section__title {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  font-weight: 400;
+  font-size: clamp(40px, 6.5vw, 100px);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  max-width: 1100px;
+}
+.section__title em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* ============ ABOUT ============ */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.about__left { position: sticky; top: 120px; }
+.about__right {
+  padding-top: 180px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.about__right p + p { margin-top: 22px; }
+.about__right .accent-line {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--accent);
+  display:block;
+  margin: 36px 0;
+  padding-left: 24px;
+  border-left: 2px solid var(--accent);
+}
+
+/* ============ SCHEDULE ============ */
+.schedule {
+  background: var(--bg-2);
+}
+.schedule__intro {
+  max-width: 1400px; margin: 0 auto 80px;
+}
+.schedule__grid {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.day {
+  display: grid;
+  grid-template-columns: 180px 1fr 1.4fr;
+  gap: 40px;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+  align-items: start;
+}
+.day:last-child { border-bottom: 1px solid var(--line); }
+.day__num {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 120px;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+.day__num span {
+  font-size: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  font-style: normal;
+  display: block;
+  color: var(--ink-3);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+.day__title {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.day__subtitle {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  margin-top: 8px;
+  font-weight: 400;
+}
+.day__schedule {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+.day__schedule div {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 16px;
+  padding: 6px 0;
+}
+.day__schedule .time { color: var(--ink-3); }
+.day__schedule .activity { color: var(--ink); }
+
+/* ============ LEARN ============ */
+.learn__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+}
+.learn__item {
+  padding: 40px 32px;
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  transition: background .35s;
+  position: relative;
+}
+.learn__item:nth-child(3n) { border-right: none; }
+.learn__item:hover { background: var(--bg-2); }
+.learn__item__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+}
+.learn__item__title {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+.learn__item__desc {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+/* ============ FOR WHOM ============ */
+.whom {
+  background: var(--ink);
+  color: var(--bg);
+}
+.whom .section__num { color: rgba(241,235,221,0.5); }
+.whom .section__num::before { background: rgba(241,235,221,0.5); }
+.whom__list {
+  margin-top: 80px;
+  max-width: 1100px;
+}
+.whom__item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-top: 1px solid rgba(241,235,221,0.15);
+  align-items: baseline;
+}
+.whom__item:last-child { border-bottom: 1px solid rgba(241,235,221,0.15); }
+.whom__item__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+.whom__item__text {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 400;
+  font-size: clamp(22px, 2.6vw, 32px);
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.whom__item__text em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* ============ PRICING ============ */
+.pricing__wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 80px;
+  max-width: 1400px;
+}
+.price-card {
+  border: 1px solid var(--ink);
+  padding: 48px 40px;
+  background: var(--bg);
+  display:flex; flex-direction: column;
+  position: relative;
+}
+.price-card.feature {
+  background: var(--ink);
+  color: var(--bg);
+}
+.price-card.feature .price-card__label,
+.price-card.feature .price-card__includes li::before { color: var(--accent); }
+.price-card__tag {
+  position: absolute; top: -12px; left: 24px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  letter-spacing: 0.1em;
+}
+.price-card__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 12px;
+}
+.price-card__title {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+}
+.price-card__title em { font-style: italic; color: var(--accent); }
+.price-card__amount {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "opsz" 144;
+  font-weight: 400;
+  font-size: 72px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin: 32px 0 6px;
+}
+.price-card__amount .unit {
+  font-size: 22px;
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 500;
+  margin-left: 4px;
+}
+.price-card__strike {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--ink-3);
+  text-decoration: line-through;
+}
+.price-card__includes {
+  list-style: none;
+  margin: 32px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  line-height: 2;
+}
+.price-card.feature .price-card__includes { border-color: rgba(241,235,221,0.2); }
+.price-card__includes li {
+  display:flex; gap: 12px;
+}
+.price-card__includes li::before {
+  content: '→';
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+}
+.price-card__cta {
+  margin-top: auto;
+  display: block;
+  text-align: center;
+  padding: 18px;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  transition: background .3s;
+}
+.price-card__cta:hover { background: var(--accent-deep); }
+
+/* ============ HOST ============ */
+.host {
+  background: var(--bg-2);
+}
+.host__wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 80px;
+  align-items: center;
+  max-width: 1400px;
+  margin: 80px auto 0;
+}
+.host__visual {
+  aspect-ratio: 4/5;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 60%, #2a1a14 100%);
+  position: relative;
+  overflow: hidden;
+}
+.host__visual::after {
+  content: 'H.';
+  position: absolute;
+  bottom: -60px; right: -20px;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "WONK" 1;
+  font-size: 420px;
+  font-weight: 300;
+  color: rgba(241,235,221,0.18);
+  line-height: 0.8;
+}
+.host__visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(241,235,221,0.15), transparent 50%);
+}
+.host__name {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 48px;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.host__name em { font-style: italic; color: var(--accent); }
+.host__role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-3);
+  margin-bottom: 28px;
+}
+.host__bio {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.host__bio p + p { margin-top: 16px; }
+.host__credits {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.host__credit__num {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 40px;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.host__credit__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--ink-2);
+  margin-top: 6px;
+}
+
+/* ============ FAQ ============ */
+.faq__list {
+  margin-top: 80px;
+  max-width: 1100px;
+  border-top: 1px solid var(--line);
+}
+.faq__item {
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+.faq__q {
+  display: grid;
+  grid-template-columns: 60px 1fr 40px;
+  gap: 24px;
+  padding: 32px 0;
+  align-items: center;
+  user-select: none;
+}
+.faq__num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+.faq__question {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 500;
+  font-size: 22px;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+.faq__icon {
+  width: 24px; height: 24px;
+  position: relative;
+  justify-self: end;
+  transition: transform .35s;
+}
+.faq__icon::before, .faq__icon::after {
+  content: ''; position: absolute;
+  background: var(--ink);
+  top: 50%; left: 0;
+}
+.faq__icon::before { width: 100%; height: 1px; transform: translateY(-0.5px); }
+.faq__icon::after  { width: 1px; height: 100%; left: 50%; top: 0; transform: translateX(-0.5px); transition: transform .35s; }
+.faq__item.open .faq__icon::after { transform: translateX(-0.5px) scaleY(0); }
+.faq__a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .45s ease, padding .45s ease;
+  font-family: 'Pretendard', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  padding: 0 60px 0 84px;
+}
+.faq__item.open .faq__a { max-height: 400px; padding: 0 60px 32px 84px; }
+
+/* ============ CTA ============ */
+.cta {
+  background: var(--accent);
+  color: var(--bg);
+  text-align: center;
+  padding: 140px 36px;
+}
+.cta__small {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  margin-bottom: 32px;
+  opacity: 0.85;
+}
+.cta__title {
+  font-family: 'Fraunces', 'Noto Serif KR', serif;
+  font-variation-settings: "opsz" 144, "SOFT" 30, "WONK" 1;
+  font-weight: 300;
+  font-size: clamp(48px, 8vw, 132px);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-style: italic;
+}
+.cta__title strong {
+  font-style: normal;
+  font-weight: 500;
+}
+.cta__button {
+  display: inline-block;
+  margin-top: 56px;
+  padding: 22px 48px;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border-radius: 100px;
+  transition: transform .3s;
+}
+.cta__button:hover { transform: translateY(-2px); }
+.cta__meta {
+  margin-top: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+
+/* ============ FOOTER ============ */
+footer {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 56px 36px 36px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(241,235,221,0.15);
+}
+.footer__brand {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.footer__brand em { color: var(--accent); }
+.footer__col h4 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(241,235,221,0.55);
+  margin-bottom: 16px;
+  font-weight: 400;
+}
+.footer__col a, .footer__col p {
+  display: block;
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(241,235,221,0.85);
+  transition: color .3s;
+}
+.footer__col a:hover { color: var(--accent); }
+.footer__bottom {
+  display:flex; justify-content: space-between; align-items: center;
+  padding-top: 28px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(241,235,221,0.5);
+  letter-spacing: 0.05em;
+}
+
+/* ============ REVEAL ============ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.reveal.in {
+  opacity: 1; transform: none;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 980px) {
+  .nav { padding: 18px 20px; }
+  .nav__links { display: none; }
+  section { padding: 80px 20px; }
+  .hero { padding: 110px 20px 40px; }
+  .hero__bottom { grid-template-columns: 1fr; gap: 24px; }
+  .about { grid-template-columns: 1fr; gap: 36px; }
+  .about__left { position: static; }
+  .about__right { padding-top: 0; font-size: 17px; }
+  .day { grid-template-columns: 1fr; gap: 16px; padding: 32px 0; }
+  .day__num { font-size: 80px; }
+  .learn__grid { grid-template-columns: 1fr; }
+  .learn__item { border-right: none !important; padding: 32px 20px; }
+  .whom__item { grid-template-columns: 1fr; gap: 8px; }
+  .pricing__wrap { grid-template-columns: 1fr; gap: 28px; }
+  .host__wrap { grid-template-columns: 1fr; gap: 40px; }
+  .host__visual { aspect-ratio: 16/12; }
+  .host__visual::after { font-size: 240px; bottom: -40px; }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+  .footer__brand { grid-column: 1 / -1; font-size: 28px; }
+  .footer__bottom { flex-direction: column; gap: 12px; }
+  .faq__q { grid-template-columns: 40px 1fr 24px; gap: 12px; }
+  .faq__question { font-size: 17px; }
+  .faq__a, .faq__item.open .faq__a { padding-left: 52px; padding-right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav__logo">vibe<em>·</em>retreat</div>
+  <div class="nav__links">
+    <a href="#about">소개</a>
+    <a href="#schedule">일정</a>
+    <a href="#learn">배움</a>
+    <a href="#pricing">가격</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#apply" class="nav__cta">신청하기 →</a>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__topmeta">
+    <div><span class="dot"></span>VIBE CODING RETREAT · 2026 SPRING</div>
+    <div>EDITION 01 / 양양</div>
+  </div>
+
+  <h1 class="hero__title">
+    바이브<br>
+    <em>코딩</em><span class="small">3박 4일</span>
+  </h1>
+
+  <div class="hero__bottom">
+    <p class="hero__lead">
+      코드를 한 줄도 써본 적 없어도 괜찮습니다.<br>
+      <strong>AI와 함께</strong> 자기만의 도구를 만드는 4일,<br>
+      서울에서 한 발짝 떨어진 동해 앞에서 시작합니다.
+    </p>
+    <div class="info-block">
+      <span class="info-block__label">Date</span>
+      <span class="info-block__value">04.20 – 04.23</span>
+    </div>
+    <div class="info-block">
+      <span class="info-block__label">Place</span>
+      <span class="info-block__value kr">강원 양양</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee">
+  <div class="marquee__track">
+    <span>코드 없이 만든다 <span class="star">✺</span> Build without code <span class="star">✺</span> 바이브로 코딩한다 <span class="star">✺</span> Made with AI <span class="star">✺</span> 3박 4일 동안 <span class="star">✺</span></span>
+    <span>코드 없이 만든다 <span class="star">✺</span> Build without code <span class="star">✺</span> 바이브로 코딩한다 <span class="star">✺</span> Made with AI <span class="star">✺</span> 3박 4일 동안 <span class="star">✺</span></span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="about-section">
+  <div class="about">
+    <div class="about__left">
+      <div class="section__num">01 / About</div>
+      <h2 class="section__title">코딩이<br><em>아니라</em> 만들기.</h2>
+    </div>
+    <div class="about__right reveal">
+      <p>지난 1년 사이, '코드를 직접 쓰는 일'은 빠르게 옛것이 되어 가고 있습니다. 이제는 만들고 싶은 것을 <strong>말로 설명하면</strong>, AI가 코드를 대신 써 줍니다.</p>
+      <p>문제는 도구가 아니라 <strong>감각</strong>입니다. 어떻게 묻고, 어떻게 고치고, 어떻게 끝까지 끌고 가는지 — 이 흐름을 우리는 '바이브 코딩'이라 부릅니다.</p>
+      <span class="accent-line">"하루는 듣고, 사흘은 만든다.<br>네 번째 날, 당신의 도구가 완성됩니다."</span>
+      <p>3박 4일, 일과 일상에서 떨어진 양양의 한 작업실에서 정원 12명. 디자이너, 작가, 사업가, 1인 창작자 — 코드를 모르지만 <strong>자기 손으로 무언가를 만들어 보고 싶은 사람</strong>을 위한 시간입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCHEDULE ============ -->
+<section id="schedule" class="schedule">
+  <div class="schedule__intro">
+    <div class="section__num">02 / Schedule</div>
+    <h2 class="section__title"><em>나흘간의</em><br>흐름.</h2>
+  </div>
+
+  <div class="schedule__grid">
+    <div class="day reveal">
+      <div class="day__num">01<span>DAY ONE · 월</span></div>
+      <div>
+        <div class="day__title">도착, 그리고 도구 세팅</div>
+        <div class="day__subtitle">— 환경을 갖춘다는 것</div>
+      </div>
+      <div class="day__schedule">
+        <div><span class="time">14:00</span><span class="activity">양양 도착, 체크인</span></div>
+        <div><span class="time">15:30</span><span class="activity">오리엔테이션 & 자기소개</span></div>
+        <div><span class="time">16:30</span><span class="activity">AI 코딩 도구 설치 (Cursor / Claude)</span></div>
+        <div><span class="time">18:30</span><span class="activity">저녁 — 동네 식당</span></div>
+        <div><span class="time">20:00</span><span class="activity">첫 페어 코딩 세션</span></div>
+        <div><span class="time">22:00</span><span class="activity">자유 시간</span></div>
+      </div>
+    </div>
+
+    <div class="day reveal">
+      <div class="day__num">02<span>DAY TWO · 화</span></div>
+      <div>
+        <div class="day__title">묻는 법, 고치는 법</div>
+        <div class="day__subtitle">— 프롬프트는 대화다</div>
+      </div>
+      <div class="day__schedule">
+        <div><span class="time">08:30</span><span class="activity">아침 산책 (옵션)</span></div>
+        <div><span class="time">10:00</span><span class="activity">프롬프트 워크숍 · 좋은 질문 만들기</span></div>
+        <div><span class="time">12:30</span><span class="activity">점심</span></div>
+        <div><span class="time">14:00</span><span class="activity">실전 — 작은 웹페이지 만들기</span></div>
+        <div><span class="time">17:00</span><span class="activity">에러를 두려워하지 않는 시간</span></div>
+        <div><span class="time">19:00</span><span class="activity">저녁 & 자유 토론</span></div>
+      </div>
+    </div>
+
+    <div class="day reveal">
+      <div class="day__num">03<span>DAY THREE · 수</span></div>
+      <div>
+        <div class="day__title">나만의 프로젝트</div>
+        <div class="day__subtitle">— 진짜 필요한 것을 만든다</div>
+      </div>
+      <div class="day__schedule">
+        <div><span class="time">10:00</span><span class="activity">프로젝트 브리프 작성</span></div>
+        <div><span class="time">11:00</span><span class="activity">1:1 멘토링 (3회차)</span></div>
+        <div><span class="time">13:00</span><span class="activity">점심 후 자유 작업</span></div>
+        <div><span class="time">16:00</span><span class="activity">중간 공유 · 피드백 라운드</span></div>
+        <div><span class="time">19:00</span><span class="activity">바닷가 저녁</span></div>
+        <div><span class="time">21:00</span><span class="activity">야간 작업실 오픈</span></div>
+      </div>
+    </div>
+
+    <div class="day reveal">
+      <div class="day__num">04<span>DAY FOUR · 목</span></div>
+      <div>
+        <div class="day__title">완성, 그리고 배포</div>
+        <div class="day__subtitle">— 세상에 내놓는 일</div>
+      </div>
+      <div class="day__schedule">
+        <div><span class="time">09:00</span><span class="activity">마무리 작업</span></div>
+        <div><span class="time">11:00</span><span class="activity">도메인 연결 & 배포</span></div>
+        <div><span class="time">13:00</span><span class="activity">점심 — 회고</span></div>
+        <div><span class="time">14:30</span><span class="activity">데모데이 · 결과물 발표</span></div>
+        <div><span class="time">16:00</span><span class="activity">수료 & 단체 사진</span></div>
+        <div><span class="time">17:00</span><span class="activity">해산</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEARN ============ -->
+<section id="learn">
+  <div class="section__num">03 / What you'll take home</div>
+  <h2 class="section__title">가지고<br>돌아갈 <em>것들.</em></h2>
+
+  <div class="learn__grid">
+    <div class="learn__item reveal">
+      <div class="learn__item__num">A · 도구</div>
+      <h3 class="learn__item__title">실전에서 쓰는 AI 코딩 환경</h3>
+      <p class="learn__item__desc">Cursor, Claude Code, GitHub Copilot — 직접 써보고 자신에게 맞는 도구를 고르는 안목까지.</p>
+    </div>
+    <div class="learn__item reveal">
+      <div class="learn__item__num">B · 감각</div>
+      <h3 class="learn__item__title">프롬프트를 짜는 감각</h3>
+      <p class="learn__item__desc">막연한 질문을 또렷한 명세로 바꾸는 법. AI에게 일을 시키는 가장 빠른 길.</p>
+    </div>
+    <div class="learn__item reveal">
+      <div class="learn__item__num">C · 자산</div>
+      <h3 class="learn__item__title">실제로 돌아가는 결과물</h3>
+      <p class="learn__item__desc">웹사이트, 자동화 스크립트, 작은 앱 — 본인 사업에 바로 쓸 수 있는 것을 만들어 갑니다.</p>
+    </div>
+    <div class="learn__item reveal">
+      <div class="learn__item__num">D · 흐름</div>
+      <h3 class="learn__item__title">막혔을 때 빠져나오는 법</h3>
+      <p class="learn__item__desc">에러 메시지를 읽는 법, AI에게 디버깅을 맡기는 법, 끝까지 끌고 가는 끈기.</p>
+    </div>
+    <div class="learn__item reveal">
+      <div class="learn__item__num">E · 배포</div>
+      <h3 class="learn__item__title">세상에 내놓는 경험</h3>
+      <p class="learn__item__desc">도메인 연결부터 첫 배포까지. '내 손으로 인터넷에 띄웠다'는 감각.</p>
+    </div>
+    <div class="learn__item reveal">
+      <div class="learn__item__num">F · 사람</div>
+      <h3 class="learn__item__title">함께 만드는 동료</h3>
+      <p class="learn__item__desc">같은 시간을 보낸 11명. 워크숍이 끝나도 이어지는 작업방, 그리고 첫 사용자들.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOR WHOM ============ -->
+<section class="whom">
+  <div class="section__num">04 / For Whom</div>
+  <h2 class="section__title">이런 분께<br><em>권합니다.</em></h2>
+
+  <div class="whom__list">
+    <div class="whom__item reveal">
+      <div class="whom__item__num">01</div>
+      <div class="whom__item__text">자기 사업에 쓸 <em>작은 도구</em>를 만들고 싶은 1인 사업가</div>
+    </div>
+    <div class="whom__item reveal">
+      <div class="whom__item__num">02</div>
+      <div class="whom__item__text">개발자에게 의뢰하기 전, <em>먼저 만들어보고</em> 싶은 기획자</div>
+    </div>
+    <div class="whom__item reveal">
+      <div class="whom__item__num">03</div>
+      <div class="whom__item__text">'AI 시대'에 흐름을 놓치지 않으려는 <em>실무자</em></div>
+    </div>
+    <div class="whom__item reveal">
+      <div class="whom__item__num">04</div>
+      <div class="whom__item__text">유튜브 강의를 사두고 끝까지 못 본 사람, <em>몰입 환경</em>이 필요한 사람</div>
+    </div>
+    <div class="whom__item reveal">
+      <div class="whom__item__num">05</div>
+      <div class="whom__item__text">코딩에 막연한 두려움이 있지만, <em>한번은 부딪혀</em> 보고 싶은 사람</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOST ============ -->
+<section class="host">
+  <div class="section__num">05 / Host</div>
+  <h2 class="section__title">진행은<br><em>한 사람이</em>.</h2>
+
+  <div class="host__wrap">
+    <div class="host__visual reveal"></div>
+    <div class="reveal">
+      <div class="host__name">한 지윤<em>.</em></div>
+      <div class="host__role">Founder · Vibe Retreat / Developer</div>
+      <div class="host__bio">
+        <p>10년 차 프로덕트 개발자. 스타트업 두 곳에서 0에서 1을 만드는 일을 했고, 지금은 AI 도구를 활용한 1인 개발 워크숍을 운영합니다.</p>
+        <p>'코딩을 가르치는 일'이 아니라 '만들 수 있다는 감각을 옮기는 일'에 관심이 있습니다. 처음 컴퓨터를 켜는 사람의 시선으로 4일을 설계했습니다.</p>
+      </div>
+      <div class="host__credits">
+        <div>
+          <div class="host__credit__num">10y+</div>
+          <div class="host__credit__label">개발 경력</div>
+        </div>
+        <div>
+          <div class="host__credit__num">06</div>
+          <div class="host__credit__label">진행한 워크숍</div>
+        </div>
+        <div>
+          <div class="host__credit__num">84</div>
+          <div class="host__credit__label">함께한 메이커</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="section__num">06 / Pricing</div>
+  <h2 class="section__title">두 가지<br><em>선택지.</em></h2>
+
+  <div class="pricing__wrap">
+    <div class="price-card reveal">
+      <div class="price-card__label">Standard</div>
+      <div class="price-card__title">참여권</div>
+      <div class="price-card__amount">1,890,000<span class="unit">원</span></div>
+      <div class="price-card__strike">정가 2,190,000원</div>
+      <ul class="price-card__includes">
+        <li>4일 전체 워크숍 프로그램</li>
+        <li>3박 숙박 (2인 1실)</li>
+        <li>모든 식사 (아침·점심·저녁)</li>
+        <li>1:1 멘토링 3회</li>
+        <li>워크숍 자료 일체</li>
+      </ul>
+      <a href="#apply" class="price-card__cta">신청하기 →</a>
+    </div>
+
+    <div class="price-card feature reveal">
+      <div class="price-card__tag">EARLY BIRD</div>
+      <div class="price-card__label">Premium</div>
+      <div class="price-card__title">참여권 <em>+ 개별실</em></div>
+      <div class="price-card__amount">2,390,000<span class="unit">원</span></div>
+      <div class="price-card__strike">정가 2,690,000원</div>
+      <ul class="price-card__includes">
+        <li>4일 전체 워크숍 프로그램</li>
+        <li>3박 숙박 (1인 1실)</li>
+        <li>모든 식사 (아침·점심·저녁)</li>
+        <li>1:1 멘토링 5회 (사후 2회 포함)</li>
+        <li>워크숍 자료 + 개인 도메인 1년</li>
+        <li>워크숍 종료 후 30일 슬랙 지원</li>
+      </ul>
+      <a href="#apply" class="price-card__cta">신청하기 →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="section__num">07 / FAQ</div>
+  <h2 class="section__title">자주 묻는<br><em>질문.</em></h2>
+
+  <div class="faq__list">
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.01</span>
+        <span class="faq__question">코드를 한 줄도 써본 적 없는데 따라갈 수 있을까요?</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">네, 그런 분을 위해 설계된 워크숍입니다. 4일 동안 AI 도구가 코드를 대신 써 주고, 우리는 '무엇을 만들지'와 '어떻게 고칠지'에 집중합니다. 사전 학습은 별도로 안내드리는 10분짜리 영상 한 편이면 충분합니다.</div>
+    </div>
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.02</span>
+        <span class="faq__question">노트북을 꼭 가져가야 하나요?</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">네, 본인 노트북이 필요합니다. 맥/윈도우 모두 가능하며, 권장 사양은 신청 확정 후 메일로 안내드립니다. 노트북이 없는 분께는 대여 옵션을 별도 문의해 주세요.</div>
+    </div>
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.03</span>
+        <span class="faq__question">어떤 것을 만들 수 있나요? 예시가 궁금합니다.</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">지난 기수에서는 — 꽃집 예약 페이지, 가계부 자동화 스크립트, 개인 포트폴리오 사이트, 작은 뉴스레터 발송기 등을 만들었습니다. 본인 일·관심사에 닿아있는 작은 도구가 가장 좋은 결과로 이어집니다.</div>
+    </div>
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.04</span>
+        <span class="faq__question">신청은 어떻게 이뤄지나요?</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">간단한 신청서를 받습니다. 정원이 12명으로 적기 때문에 — '왜 참여하고 싶은지', '무엇을 만들고 싶은지'를 보고 진행합니다. 신청 후 3일 내 합격 여부와 결제 안내를 받게 됩니다.</div>
+    </div>
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.05</span>
+        <span class="faq__question">환불 정책은 어떻게 되나요?</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">시작 21일 전까지 전액 환불 / 14일 전까지 70% / 7일 전까지 30% / 그 이후는 환불이 어렵습니다. 자세한 약관은 결제 페이지에서 확인 가능합니다.</div>
+    </div>
+    <div class="faq__item">
+      <div class="faq__q">
+        <span class="faq__num">Q.06</span>
+        <span class="faq__question">양양까지는 어떻게 이동하나요?</span>
+        <span class="faq__icon"></span>
+      </div>
+      <div class="faq__a">서울 기준 KTX 또는 자차로 약 2시간 30분 거리입니다. 신청 확정 시 픽업 셔틀 정보(서울역 기준)와 추천 동선을 함께 보내드립니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="apply" class="cta">
+  <div class="cta__small">APPLICATIONS OPEN · 정원 12명</div>
+  <h2 class="cta__title">
+    <strong>네 번째 날,</strong><br>
+    당신의 도구가<br>완성됩니다.
+  </h2>
+  <a href="#" class="cta__button">지금 신청서 작성하기 →</a>
+  <div class="cta__meta">
+    Edition 01 · 2026.04.20 – 04.23 · 강원 양양
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer__top">
+    <div class="footer__brand">vibe<em>·</em>retreat<br><span style="font-size:14px; font-style:normal; font-family:'JetBrains Mono', monospace; letter-spacing:0.1em; opacity:0.6;">EDITION 01 / 2026</span></div>
+    <div class="footer__col">
+      <h4>Program</h4>
+      <a href="#about">소개</a>
+      <a href="#schedule">일정</a>
+      <a href="#learn">배움</a>
+      <a href="#pricing">가격</a>
+    </div>
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <p>hello@viberetreat.kr</p>
+      <p>인스타그램 @vibe.retreat</p>
+    </div>
+    <div class="footer__col">
+      <h4>Address</h4>
+      <p>강원 양양군<br>현북면 어느 작업실</p>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div>© 2026 Vibe Retreat. All rights reserved.</div>
+    <div>Made with vibes · Not with code.</div>
+  </div>
+</footer>
+
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq__item').forEach(item => {
+  item.addEventListener('click', () => {
+    item.classList.toggle('open');
+  });
+});
+
+// Reveal on scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
